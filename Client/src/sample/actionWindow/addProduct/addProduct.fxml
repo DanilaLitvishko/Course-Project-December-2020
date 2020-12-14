@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.actionWindow.addProduct.AddProduct">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="520.0" spacing="10">
+         <children>
+            <Label prefHeight="17.0" prefWidth="138.0" text="Добавление товара" />
+            <HBox prefHeight="30.0" prefWidth="520.0" spacing="10">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Введите название товара:" />
+                  <TextField promptText="Например, gosha777" fx:id="name"/>
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="520.0" spacing="10">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Введите стоимость товара:" />
+                  <TextField promptText="Например, gosha777" fx:id="price"/>
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="460.0" spacing="10">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите категорию товара:" />
+                  <ComboBox fx:id="category" minWidth="-Infinity" prefWidth="150.0">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Продукты питания" />
+                           <String fx:value="Игрушки" />
+                           <String fx:value="Электроника" />
+                           <String fx:value="Компьютерная техника" />
+                           <String fx:value="Бытовая техника" />
+                           <String fx:value="Косметика" />
+                           <String fx:value="Мебель" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="460.0" spacing="10">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите дату поступления товара:" />
+                  <DatePicker fx:id="date"/>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" text="Отправить" onAction="#addProduct"/>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

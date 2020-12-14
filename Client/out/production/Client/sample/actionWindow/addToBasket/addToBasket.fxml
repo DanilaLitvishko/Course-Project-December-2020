@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.actionWindow.addToBasket.AddToBasket">
+    <children>
+        <VBox prefHeight="500.0" prefWidth="783.0">
+            <TableView fx:id="table" layoutX="127.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <columns>
+                    <TableColumn fx:id="number" prefWidth="100.0" text="Номер товара" />
+                    <TableColumn fx:id="name" prefWidth="150.0" text="Название" />
+                    <TableColumn fx:id="date" prefWidth="150.0" text="Дата поступления" />
+                    <TableColumn fx:id="price" prefWidth="100.0" text="Цена" />
+                    <TableColumn fx:id="category" prefWidth="100.0" text="Категория" />
+                </columns>
+            </TableView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+                <children>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите номер добавляемой записи:" />
+                    <ComboBox fx:id="numberBox" prefWidth="150.0" />
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите количество товара:" />
+                    <ComboBox fx:id="quantityBox" prefWidth="150.0">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="1" />
+                                <String fx:value="2" />
+                                <String fx:value="3" />
+                                <String fx:value="4" />
+                                <String fx:value="5" />
+                                <String fx:value="6" />
+                                <String fx:value="7" />
+                                <String fx:value="8" />
+                                <String fx:value="9" />
+                                <String fx:value="10" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Button mnemonicParsing="false" onAction="#addToBasket" text="Добавить " />
+                </children>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

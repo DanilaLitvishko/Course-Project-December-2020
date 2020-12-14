@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.actionWindow.changeStateOrder.ChangeStateOrder"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <VBox prefHeight="500.0" prefWidth="680.0">
+            <TableView fx:id="table" layoutX="127.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <columns>
+                    <TableColumn fx:id="id" prefWidth="123.0" text="Номер заказа" />
+                    <TableColumn fx:id="userInfo" prefWidth="127.0" text="Информация о пользователе" />
+                    <TableColumn fx:id="email" prefWidth="150.0" text="Адрес электронной почты" />
+                    <TableColumn fx:id="state" prefWidth="150.0" text="Cтатус" />
+                    <TableColumn fx:id="basketId" prefWidth="150.0" text="Номер корзины" />
+                </columns>
+            </TableView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+                <children>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите номер заказа" />
+                    <ComboBox fx:id="idBox" prefWidth="150.0" />
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите статус" />
+                    <ComboBox fx:id="stateBox" prefWidth="150.0">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Ожидает отправки" />
+                                <String fx:value="Отправлено" />
+                                <String fx:value="Принято" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Button mnemonicParsing="false" onAction="#edit" text="Редактировать" />
+                </children>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

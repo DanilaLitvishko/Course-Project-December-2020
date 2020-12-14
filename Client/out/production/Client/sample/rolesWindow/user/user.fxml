@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.rolesWindow.user.User">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" text="Меню пользователя">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Button mnemonicParsing="false" text="Просмотр товаров" onAction="#openShowWindow" />
+      <Button mnemonicParsing="false" text="Добавление товара в корзину" onAction="#addToBasket"/>
+      <Button mnemonicParsing="false" text="Оформление заказа" onAction="#createOrder"/>
+      <Button mnemonicParsing="false" text="Корзина" onAction="#showBasket"/>
+      <Button mnemonicParsing="false" text="История заказов" onAction="#historyOrders"/>
+      <Button mnemonicParsing="false" text="Просмотр категорий товаров" onAction="#openShowCategoryWindow"/>
+   </children>
+</VBox>

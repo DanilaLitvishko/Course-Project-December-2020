@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.actionWindow.deleteProduct.DeleteProduct">
+    <children>
+        <VBox>
+            <TableView fx:id="table" layoutX="127.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <columns>
+                    <TableColumn fx:id="number" prefWidth="100.0" text="Номер товара" />
+                    <TableColumn fx:id="name" prefWidth="150.0" text="Название" />
+                    <TableColumn fx:id="date" prefWidth="150.0" text="Дата поступления" />
+                    <TableColumn fx:id="price" prefWidth="100.0" text="Цена" />
+                    <TableColumn fx:id="category" prefWidth="100.0" text="Категория" />
+                </columns>
+            </TableView>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите номер удаляемой записи" />
+               <ComboBox prefWidth="150.0" fx:id="numberBox"/>
+               <Button mnemonicParsing="false" text="Удалить" onAction="#delete"/>
+            </children>
+         </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

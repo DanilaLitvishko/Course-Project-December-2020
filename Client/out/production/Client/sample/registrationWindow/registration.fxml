@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.registrationWindow.Registration">
+        <children>
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="10.0">
+                <children>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Регистрация" textAlignment="CENTER" wrappingWidth="143.484375">
+                        <font>
+                            <Font size="24.0" />
+                        </font></Text>
+                    <HBox alignment="CENTER" prefHeight="0.0" prefWidth="1200.0" spacing="5.0">
+                        <children>
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Введите логин:" wrappingWidth="97.978515625" />
+                            <TextField fx:id="registrationLogin" promptText="Например, gosha777"/>
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="0.0" prefWidth="1200.0" spacing="5.0">
+                        <children>
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Введите пароль:" wrappingWidth="98.619140625" />
+                            <PasswordField fx:id="registrationPassword" promptText="Например, 12345"/>
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="0.0" prefWidth="1200.0" spacing="5.0">
+                        <children>
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите роль: " wrappingWidth="98.619140625" />
+                            <ComboBox fx:id="roles" minWidth="-Infinity" prefWidth="150.0">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Пользователь" />
+                                        <String fx:value="Администратор" />
+                                        <String fx:value="Поставщик" />
+                                    </FXCollections>
+                                </items>
+                            </ComboBox>
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="0.0" prefWidth="1200.0" spacing="5.0">
+                        <children>
+                            <Button mnemonicParsing="false" fx:id="registrationButton" onAction="#registration" text="Зарегестрироваться" />
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </children>
+</AnchorPane>

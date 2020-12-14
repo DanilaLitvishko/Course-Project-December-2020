@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.rolesWindow.admin.Admin">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="138.0" text="Меню Администратора" />
+            <Button mnemonicParsing="false" text="Просмотр товаров" onAction="#openShowWindow"/>
+            <Button mnemonicParsing="false" text="Добавление товаров" onAction="#openAddWindow"/>
+            <Button mnemonicParsing="false" text="Удаление товаров" onAction="#openDeleteWindow"/>
+            <Button mnemonicParsing="false" text="Редактирование информации" onAction="#openEditWindow"/>
+            <Button mnemonicParsing="false" text="Отчет о продажах" onAction="#openSalesReport"/>
+            <Button mnemonicParsing="false" text="Отчет о популярности товаров" onAction="#openPopularityReport"/>
+            <Button mnemonicParsing="false" text="Окно пользователей " onAction="#openUsersWindow"/>
+            <Button mnemonicParsing="false" text="Просмотр заказов " onAction="#showOrders"/>
+            <Button mnemonicParsing="false" text="Изменение статуса заказа " onAction="#changeStateOrder"/>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.actionWindow.usersWindow.UsersWindow"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <VBox prefHeight="500.0" prefWidth="680.0">
+            <TableView fx:id="table" layoutX="127.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <columns>
+                    <TableColumn fx:id="login" prefWidth="100.0" text="Логин" />
+                    <TableColumn fx:id="password" prefWidth="150.0" text="Пароль" />
+                    <TableColumn fx:id="role" prefWidth="150.0" text="Роль" />
+                </columns>
+            </TableView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+                <children>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите логин удаляемого пользователя" />
+                    <ComboBox fx:id="userBox" prefWidth="150.0" />
+                    <Button mnemonicParsing="false" onAction="#delete" text="Удалить" />
+                </children>
+            </HBox>
+        </VBox>
+    </children>
+
+</AnchorPane>
