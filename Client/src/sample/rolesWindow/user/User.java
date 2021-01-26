@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
 import sample.actionWindow.Basket.Basket;
 import sample.actionWindow.Basket.BasketInfo;
 import sample.actionWindow.addToBasket.AddToBasket;
@@ -22,8 +23,7 @@ public class User {
     private String login = new String();
 
     @FXML
-    private void openShowWindow()
-    {
+    private void openShowWindow() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/showProduct/showProduct.fxml"));
         try {
@@ -42,8 +42,7 @@ public class User {
     }
 
     @FXML
-    private void openShowCategoryWindow()
-    {
+    private void openShowCategoryWindow() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/showCategory/showCategory.fxml"));
         try {
@@ -82,8 +81,7 @@ public class User {
     }
 
     @FXML
-    private void showBasket()
-    {
+    private void showBasket() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/Basket/basket.fxml"));
         try {
@@ -131,8 +129,7 @@ public class User {
     }
 
     @FXML
-    private void historyOrders()
-    {
+    private void historyOrders() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/historyOrders/historyOrders.fxml"));
         try {

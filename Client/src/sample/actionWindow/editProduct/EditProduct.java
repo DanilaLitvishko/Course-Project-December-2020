@@ -5,6 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import sample.actionWindow.showProduct.Table;
 
 import static sample.Controller.send;
@@ -42,21 +46,20 @@ public class EditProduct {
     @FXML
     TextField editText;
 
-    public void inizialize()
-    {
-        String answer = send("show,product");
-        String[] text = answer.split("\n");
-        int i = 0;
-        for(String str:text)
+    public void inizialize() throws ParseException {
+        JSONObject request = new JSONObject();
+        request.put("action", "show");
+        request.put("object", "product");
+        String answer = send(request.toJSONString());
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = (JSONObject)parser.parse(answer);
+        JSONArray products = (JSONArray) jsonObject.get("products");
+        for(int i = 0;i < products.size();i++)
         {
-            i++;
-            String[] str2 = str.split(",");
-            namesForEdit[i] = str2[0];
-            obList.add(new Table(str2[0], str2[1], str2[2], str2[3], Integer.toString(i)));
-        }
-        for(int j=0;j<i;j++)
-        {
-            numberBox.getItems().add(Integer.toString(j + 1));
+            JSONObject product = (JSONObject)products.get(i);
+            namesForEdit[i] = (String)product.get("name");
+            numberBox.getItems().add(Integer.toString(i + 1));
+            obList.add(new Table((String)product.get("name"), (String)product.get("date"), (String)product.get("price"), (String)product.get("category"), Integer.toString(i)));
         }
         number.setCellValueFactory(new PropertyValueFactory<>("id"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -68,21 +71,26 @@ public class EditProduct {
 
     @FXML
     private void edit() {
+        JSONObject request = new JSONObject();
+        request.put("action", "edit");
+        request.put("object", "product");
+
         String num = (String) numberBox.getSelectionModel().getSelectedItem();
         String check = (String) categoryBox.getSelectionModel().getSelectedItem();
+
         if(num != null || editText.getText().matches("[a-zA-Z]+\\s"))
         {
             if (check.equals("Цена")) {
-                String info = "price";
-                String answer = send("edit product " +
-                        namesForEdit[Integer.parseInt((String) numberBox.getSelectionModel().getSelectedItem())] + " " +
-                        info + " " + editText.getText());
+                request.put("info", "price");
+                request.put("old", namesForEdit[Integer.parseInt((String) numberBox.getSelectionModel().getSelectedItem())]);
+                request.put("new", editText.getText());
+                String answer = send(request.toJSONString());
             } else {
                 if (check.equals("Название")) {
-                    String info = "name";
-                    String answer = send("edit product " +
-                            namesForEdit[Integer.parseInt((String) numberBox.getSelectionModel().getSelectedItem())] + " " +
-                            info + " " + editText.getText());
+                    request.put("info", "name");
+                    request.put("old", namesForEdit[Integer.parseInt((String) numberBox.getSelectionModel().getSelectedItem())]);
+                    request.put("new", editText.getText());
+                    String answer = send(request.toJSONString());
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Ошибка");

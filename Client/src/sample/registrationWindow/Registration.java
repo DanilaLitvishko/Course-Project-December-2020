@@ -3,7 +3,10 @@ package sample.registrationWindow;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.json.simple.JSONObject;
 import sample.Controller;
+
+import static sample.Controller.send;
 
 public class Registration {
 
@@ -30,8 +33,12 @@ public class Registration {
             alert.showAndWait();
         }
         else{
-            String answer = Controller.send("registration," + registrationLogin.getText() + "," + registrationPassword.getText() + ","
-                    + (String)roles.getSelectionModel().getSelectedItem());
+            JSONObject request = new JSONObject();
+            request.put("action", "registration");
+            request.put("login", registrationLogin.getText());
+            request.put("password", registrationPassword.getText());
+            request.put("role", (String)roles.getSelectionModel().getSelectedItem());
+            String answer = send(request.toJSONString());
             if(answer.equals("Error!"))
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

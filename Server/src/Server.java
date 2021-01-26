@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -21,9 +23,11 @@ public class Server {
      * @param args
      */
     public static void main(String[] args) {
-        try (ServerSocket server = new ServerSocket(2525);
-             BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-            System.out.println("Сервер запущен на порте 2525");
+        try (ServerSocket server = new ServerSocket(5050);
+             BufferedReader br = new BufferedReader(new InputStreamReader(System.in)))
+        {
+
+            System.out.println("Сервер запущен на порте 5050");
             while (!server.isClosed()) {
                 Socket client = server.accept();
                 executeIt.execute(new MonoThreadClientHandler(client));

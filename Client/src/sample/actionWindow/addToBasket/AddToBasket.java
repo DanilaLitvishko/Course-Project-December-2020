@@ -8,6 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.json.simple.JSONObject;
 import sample.actionWindow.showProduct.Table;
 
 import static sample.Controller.send;
@@ -75,7 +76,13 @@ public class AddToBasket {
         String str2 = (String) quantityBox.getSelectionModel().getSelectedItem();
         if(str1 != null || str2 != null)
         {
-            String answer = send("addToBasket," + namesForAddToBasket[Integer.parseInt(str1)] + "," + login + "," + Integer.parseInt(str2));
+            JSONObject request = new JSONObject();
+            request.put("action", "add");
+            request.put("object", "toBasket");
+            request.put("name", namesForAddToBasket[Integer.parseInt(str1)]);
+            request.put("login", login);
+            request.put("quantity", Integer.parseInt(str2));
+            String answer = send(request.toJSONString());
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -8,6 +8,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import sample.actionWindow.showProduct.Table;
 
 import static sample.Controller.send;
@@ -39,19 +43,21 @@ public class DeleteProduct {
         @FXML
         ComboBox<String> numberBox;
 
-        public void inizialize()
-        {
-            String answer = send("show,product");
-            String[] text = answer.split("\n");
-            int i = 0;
-            for(String str:text)
+        public void inizialize() throws ParseException {
+            JSONObject request = new JSONObject();
+            request.put("action", "show");
+            request.put("object", "product");
+            String answer = send(request.toJSONString());
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject)parser.parse(answer);
+            JSONArray products = (JSONArray) jsonObject.get("products");
+            for(int i = 0;i < products.size();i++)
             {
-                i++;
-                String[] str2 = str.split(",");
-                namesForDelete[i] = str2[0];
-                obList.add(new Table(str2[0], str2[1], str2[2], str2[3], Integer.toString(i)));
+                JSONObject product = (JSONObject)products.get(i);
+                namesForDelete[i] = (String)product.get("name");
+                obList.add(new Table((String)product.get("name"), (String)product.get("date"), (String)product.get("price"), (String)product.get("category"), Integer.toString(i)));
             }
-            for(int j=0;j<i;j++)
+            for(int j=0;j<products.size();j++)
             {
                 numberBox.getItems().add(Integer.toString(j + 1));
             }
@@ -68,7 +74,11 @@ public class DeleteProduct {
             String str = (String) numberBox.getSelectionModel().getSelectedItem();
             if(str != null)
             {
-                String answer = send("delete,product," + namesForDelete[Integer.parseInt((String) numberBox.getSelectionModel().getSelectedItem())]);
+                JSONObject request = new JSONObject();
+                request.put("action", "delete");
+                request.put("object", "product");
+                request.put("nameProduct", str);
+                String answer = send(request.toJSONString());
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

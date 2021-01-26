@@ -6,6 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import static sample.Controller.send;
 
@@ -31,15 +35,19 @@ public class ShowOrders {
 
     ObservableList<Order> obList = FXCollections.observableArrayList();
 
-    public void inizialize()
-    {
-        String answer = send("show,orders");
-        String[] text = answer.split("\n");
-        for(String str:text)
+    public void inizialize() throws ParseException {
+        JSONObject request = new JSONObject();
+        request.put("action", "show");
+        request.put("object", "category");
+        String answer = send(request.toJSONString());
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = (JSONObject)parser.parse(answer);
+        JSONArray products = (JSONArray) jsonObject.get("orders");
+        for(int i = 0;i < products.size();i++)
         {
-            String[] str2 = str.split(",");
-            obList.add(new Order(str2[0], str2[1], str2[2], str2[3], str2[4]));
-
+            JSONObject product = (JSONObject)products.get(i);
+            obList.add(new Order((String)product.get("id"), (String)product.get("userInfo"), (String)product.get("email"),
+                    (String)product.get("state"), (String)product.get("basketId")));
         }
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         userInfo.setCellValueFactory(new PropertyValueFactory<>("userInfo"));

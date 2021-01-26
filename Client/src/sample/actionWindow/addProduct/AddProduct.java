@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import org.json.simple.JSONObject;
 
 import java.util.regex.Pattern;
 
@@ -34,8 +35,14 @@ public class AddProduct {
                 alert.setHeaderText("Неправильный формат ввода!");
                 alert.showAndWait();
             } else {
-                String answer = send("addProduct," + name.getText() + "," + date.getValue().toString() + ","
-                        + price.getText() + "," + str);
+                JSONObject request = new JSONObject();
+                request.put("action", "add");
+                request.put("object", "product");
+                request.put("name", name.getText());
+                request.put("date", date.getValue().toString());
+                request.put("price", price.getText());
+                request.put("category", str);
+                String answer = send(request.toJSONString());
                 if (answer.equals("Error, this name in use")) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Ошибка");

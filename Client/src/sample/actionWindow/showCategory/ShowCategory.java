@@ -6,7 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import sample.actionWindow.showProduct.Table;
+import sample.actionWindow.usersWindow.User;
 
 import static sample.Controller.send;
 
@@ -23,16 +28,18 @@ public class ShowCategory {
 
     ObservableList<Category> obList = FXCollections.observableArrayList();
 
-    public void inizialize()
-    {
-        String answer = send("show,category");
-        String[] text = answer.split("\n");
-        int i = 0;
-        for(String str:text)
+    public void inizialize() throws ParseException {
+        JSONObject request = new JSONObject();
+        request.put("action", "show");
+        request.put("object", "category");
+        String answer = send(request.toJSONString());
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = (JSONObject)parser.parse(answer);
+        JSONArray products = (JSONArray) jsonObject.get("users");
+        for(int i = 0;i < products.size();i++)
         {
-            i++;
-            String[] str2 = str.split(",");
-            obList.add(new Category(str2[0], str2[1]));
+            JSONObject product = (JSONObject)products.get(i);
+            obList.add(new Category((String)product.get("name"), (String)product.get("description")));
         }
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         description.setCellValueFactory(new PropertyValueFactory<>("description"));

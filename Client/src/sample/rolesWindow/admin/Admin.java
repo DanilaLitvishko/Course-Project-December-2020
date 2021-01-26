@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
 import sample.actionWindow.changeStateOrder.ChangeStateOrder;
 import sample.actionWindow.deleteProduct.DeleteProduct;
 import sample.actionWindow.editProduct.EditProduct;
@@ -20,8 +21,7 @@ import java.io.IOException;
 public class Admin {
 
     @FXML
-    private void openShowWindow()
-    {
+    private void openShowWindow() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/showProduct/showProduct.fxml"));
         try {
@@ -58,8 +58,7 @@ public class Admin {
     }
 
     @FXML
-    private void openDeleteWindow()
-    {
+    private void openDeleteWindow() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/deleteProduct/deleteProduct.fxml"));
         try {
@@ -78,8 +77,7 @@ public class Admin {
     }
 
     @FXML
-    private void openEditWindow()
-    {
+    private void openEditWindow() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/editProduct/editProduct.fxml"));
         try {
@@ -98,8 +96,7 @@ public class Admin {
     }
 
     @FXML
-    private void openPopularityReport()
-    {
+    private void openPopularityReport() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/popularityReport/popularityReport.fxml"));
         try {
@@ -118,8 +115,7 @@ public class Admin {
     }
 
     @FXML
-    private void openSalesReport()
-    {
+    private void openSalesReport() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/salesReport/salesReport.fxml"));
         try {
@@ -138,8 +134,7 @@ public class Admin {
     }
 
     @FXML
-    private void openUsersWindow()
-    {
+    private void openUsersWindow() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/usersWindow/usersWindow.fxml"));
         try {
@@ -158,8 +153,7 @@ public class Admin {
     }
 
     @FXML
-    private void showOrders()
-    {
+    private void showOrders() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/showOrders/showOrders.fxml"));
         try {
@@ -178,8 +172,7 @@ public class Admin {
     }
 
     @FXML
-    private void changeStateOrder()
-    {
+    private void changeStateOrder() throws ParseException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/actionWindow/changeStateOrder/changeStateOrder.fxml"));
         try {

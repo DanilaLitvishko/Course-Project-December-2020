@@ -5,6 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import sample.actionWindow.showOrders.Order;
 import sample.actionWindow.showProduct.Table;
 
@@ -40,15 +44,19 @@ public class ChangeStateOrder {
 
     ObservableList<Order> obList = FXCollections.observableArrayList();
 
-    public void inizialize()
-    {
-        String answer = send("show,orders");
-        String[] text = answer.split("\n");
-        for(String str:text)
+    public void inizialize() throws ParseException {
+        JSONObject request = new JSONObject();
+        request.put("action", "show");
+        request.put("object", "category");
+        String answer = send(request.toJSONString());
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = (JSONObject)parser.parse(answer);
+        JSONArray products = (JSONArray) jsonObject.get("users");
+        for(int i = 0;i < products.size();i++)
         {
-            String[] str2 = str.split(",");
-            obList.add(new Order(str2[0], str2[1], str2[2], str2[3], str2[4]));
-            idBox.getItems().add(str2[0]);
+            JSONObject product = (JSONObject)products.get(i);
+            obList.add(new Order((String)product.get("id"), (String)product.get("userInfo"), (String)product.get("email"),
+                    (String)product.get("state"), (String)product.get("basketId")));
         }
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         userInfo.setCellValueFactory(new PropertyValueFactory<>("userInfo"));
@@ -60,11 +68,16 @@ public class ChangeStateOrder {
 
     @FXML
     private void edit() {
+        JSONObject request = new JSONObject();
+        request.put("action", "edit");
         String check = (String) idBox.getSelectionModel().getSelectedItem();
         String state = (String) stateBox.getSelectionModel().getSelectedItem();
         if(check != null || state != null)
         {
-            String answer = send("edit state " + check + " " + state);
+            request.put("info", "state");
+            request.put("id", check);
+            request.put("new", state);
+            String answer = send(request.toJSONString());
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

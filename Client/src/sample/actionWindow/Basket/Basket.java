@@ -10,6 +10,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import sample.actionWindow.createOrder.CreateOrder;
 
 import java.io.IOException;
@@ -38,22 +42,23 @@ public class Basket {
 
     ObservableList<BasketInfo> obList = FXCollections.observableArrayList();
 
-    public void inizialize(String userLogin)
-    {
-        String answer = send("show,basket," + userLogin);
-        login = userLogin;
-        System.out.println(answer);
-        String[] text = answer.split("\n");
-        int i = 0;
-        for(String str:text)
+    public void inizialize(String userLogin) throws ParseException {
+        JSONObject request = new JSONObject();
+        request.put("action", "show");
+        request.put("object", "basket");
+        request.put("login", userLogin);
+        String answer = send(request.toJSONString());
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = (JSONObject)parser.parse(answer);
+        JSONArray products = (JSONArray) jsonObject.get("basket");
+        for(int i = 0;i < products.size();i++)
         {
-            i++;
-            String[] str2 = str.split(",");
-            namesForAddToBasket[i] = str2[0];
-            productId.append(str2[3] + " ");
-            obList.add(new BasketInfo(str2[0], str2[1] , str2[2]));
-
+            JSONObject product = (JSONObject)products.get(i);
+            namesForAddToBasket[i] = (String)product.get("product");
+            productId.append((String)product.get("id") + " ");
+            obList.add(new BasketInfo((String)product.get("product"), (String)product.get("time"), (String)product.get("quantity")));
         }
+        login = userLogin;
         product.setCellValueFactory(new PropertyValueFactory<>("product"));
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));

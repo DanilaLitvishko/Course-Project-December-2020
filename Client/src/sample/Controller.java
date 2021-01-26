@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.json.simple.JSONObject;
 import sample.animation.Shake;
 import sample.rolesWindow.user.User;
 
@@ -32,8 +33,11 @@ public class Controller {
     private void authorization()
     {
         //Добавить анимацию движения полей, если авторизация не успешна
-
-        String result = send("authorization," + authorizationLogin.getText() + "," + authorizationPassword.getText());
+        JSONObject request = new JSONObject();
+        request.put("action", "authorization");
+        request.put("login", authorizationLogin.getText());
+        request.put("password", authorizationPassword.getText());
+        String result = send(request.toJSONString());
         if(result.equals("Not found"))
         {
             Shake userPassw = new Shake(authorizationPassword);
@@ -108,8 +112,7 @@ public class Controller {
     public static String send(String sendStr)
     {
         String answer;
-        try(Socket socket = new Socket("localhost", 2525);
-            BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
+        try(Socket socket = new Socket("localhost", 5050);
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream()); )
         {
